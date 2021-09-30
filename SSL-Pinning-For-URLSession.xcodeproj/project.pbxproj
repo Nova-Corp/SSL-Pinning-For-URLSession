@@ -13,6 +13,12 @@
 		040F60A42705EC0C00CE09CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040F60A22705EC0C00CE09CE /* Main.storyboard */; };
 		040F60A62705EC0D00CE09CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040F60A52705EC0D00CE09CE /* Assets.xcassets */; };
 		040F60A92705EC0D00CE09CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040F60A72705EC0D00CE09CE /* LaunchScreen.storyboard */; };
+		040F60BD2705EEEC00CE09CE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60B82705EEEC00CE09CE /* NetworkService.swift */; };
+		040F60BE2705EEEC00CE09CE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60B92705EEEC00CE09CE /* HTTPMethod.swift */; };
+		040F60BF2705EEEC00CE09CE /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60BA2705EEEC00CE09CE /* Route.swift */; };
+		040F60C02705EEEC00CE09CE /* InputValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60BB2705EEEC00CE09CE /* InputValidationService.swift */; };
+		040F60C12705EEEC00CE09CE /* LocalErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60BC2705EEEC00CE09CE /* LocalErrors.swift */; };
+		040F60C42705F5A100CE09CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60C32705F5A100CE09CE /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		040F60A52705EC0D00CE09CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		040F60A82705EC0D00CE09CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		040F60AA2705EC0D00CE09CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		040F60B82705EEEC00CE09CE /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		040F60B92705EEEC00CE09CE /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		040F60BA2705EEEC00CE09CE /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		040F60BB2705EEEC00CE09CE /* InputValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidationService.swift; sourceTree = "<group>"; };
+		040F60BC2705EEEC00CE09CE /* LocalErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalErrors.swift; sourceTree = "<group>"; };
+		040F60C32705F5A100CE09CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +68,77 @@
 		040F609B2705EC0C00CE09CE /* SSL-Pinning-For-URLSession */ = {
 			isa = PBXGroup;
 			children = (
+				040F60C22705F58200CE09CE /* Model */,
+				040F60B62705EEEC00CE09CE /* Service */,
+				040F60B02705EC2200CE09CE /* Delegate */,
+				040F60B32705ECCD00CE09CE /* Controller */,
+				040F60B22705ECB800CE09CE /* Storyboard */,
+				040F60B12705EC5500CE09CE /* Global */,
+			);
+			path = "SSL-Pinning-For-URLSession";
+			sourceTree = "<group>";
+		};
+		040F60B02705EC2200CE09CE /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
 				040F609C2705EC0C00CE09CE /* AppDelegate.swift */,
 				040F609E2705EC0C00CE09CE /* SceneDelegate.swift */,
-				040F60A02705EC0C00CE09CE /* ViewController.swift */,
-				040F60A22705EC0C00CE09CE /* Main.storyboard */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		040F60B12705EC5500CE09CE /* Global */ = {
+			isa = PBXGroup;
+			children = (
 				040F60A52705EC0D00CE09CE /* Assets.xcassets */,
 				040F60A72705EC0D00CE09CE /* LaunchScreen.storyboard */,
 				040F60AA2705EC0D00CE09CE /* Info.plist */,
 			);
-			path = "SSL-Pinning-For-URLSession";
+			path = Global;
+			sourceTree = "<group>";
+		};
+		040F60B22705ECB800CE09CE /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				040F60A22705EC0C00CE09CE /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		040F60B32705ECCD00CE09CE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				040F60A02705EC0C00CE09CE /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		040F60B62705EEEC00CE09CE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				040F60B72705EEEC00CE09CE /* Network Service */,
+				040F60BB2705EEEC00CE09CE /* InputValidationService.swift */,
+				040F60BC2705EEEC00CE09CE /* LocalErrors.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		040F60B72705EEEC00CE09CE /* Network Service */ = {
+			isa = PBXGroup;
+			children = (
+				040F60B82705EEEC00CE09CE /* NetworkService.swift */,
+				040F60B92705EEEC00CE09CE /* HTTPMethod.swift */,
+				040F60BA2705EEEC00CE09CE /* Route.swift */,
+			);
+			path = "Network Service";
+			sourceTree = "<group>";
+		};
+		040F60C22705F58200CE09CE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				040F60C32705F5A100CE09CE /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +213,12 @@
 			files = (
 				040F60A12705EC0C00CE09CE /* ViewController.swift in Sources */,
 				040F609D2705EC0C00CE09CE /* AppDelegate.swift in Sources */,
+				040F60C02705EEEC00CE09CE /* InputValidationService.swift in Sources */,
+				040F60BD2705EEEC00CE09CE /* NetworkService.swift in Sources */,
+				040F60C12705EEEC00CE09CE /* LocalErrors.swift in Sources */,
+				040F60C42705F5A100CE09CE /* User.swift in Sources */,
+				040F60BF2705EEEC00CE09CE /* Route.swift in Sources */,
+				040F60BE2705EEEC00CE09CE /* HTTPMethod.swift in Sources */,
 				040F609F2705EC0C00CE09CE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "SSL-Pinning-For-URLSession/Info.plist";
+				INFOPLIST_FILE = "SSL-Pinning-For-URLSession/Global/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,7 +385,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "SSL-Pinning-For-URLSession/Info.plist";
+				INFOPLIST_FILE = "SSL-Pinning-For-URLSession/Global/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
