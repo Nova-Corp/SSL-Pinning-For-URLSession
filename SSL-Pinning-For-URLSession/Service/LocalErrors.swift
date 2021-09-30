@@ -13,11 +13,13 @@ import Foundation
 enum ValidationError: LocalizedError {
     case unknownError
     case serverError
+    case parsingError
 
     var errorDescription: String? {
-    switch self {
+        switch self {
         case .unknownError: return "Unknown Error!"
         case .serverError: return "Server Error!"
+        case .parsingError: return "Unable to parse the response"
         }
     }
 }

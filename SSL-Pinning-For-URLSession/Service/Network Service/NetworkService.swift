@@ -12,8 +12,8 @@ final class NetworkService {
     static let shared = NetworkService()
     private init() {}
     // MARK:- Get User List
-    func makeRequestForUserList(with params: [String: Any], completion: @escaping (Result<[User], Error>) -> Void) {
-        request(route: .user, parameter: params, type: [User].self,completion: completion)
+    func makeRequestForUserList(completion: @escaping (Result<[User], Error>) -> Void) {
+        request(route: .user, type: [User].self,completion: completion)
     }
     
     private func request<T: Codable>(route: Route,
@@ -31,7 +31,8 @@ final class NetworkService {
                 let decoder = JSONDecoder()
                 
                 guard let result = try? decoder.decode(type, from: data) else{
-                    print("Error Happening!")
+                    print("Error is:-------> \(ValidationError.parsingError.localizedDescription)")
+                    completion(.failure(ValidationError.parsingError))
                     return
                 }
                 completion(.success(result))
