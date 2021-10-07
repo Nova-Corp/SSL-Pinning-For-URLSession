@@ -12,10 +12,13 @@ enum Route {
     static let baseURL = "https://jsonplaceholder.typicode.com/"
     case user
     case defaultImageAddress
+    case posts
     var description: String {
         switch self {
         case .user:
             return "users"
+        case .posts:
+            return "posts"
         case .defaultImageAddress:
             return "https://i.pinimg.com/originals/4e/24/f5/4e24f523182e09376bfe8424d556610a.png"
         }

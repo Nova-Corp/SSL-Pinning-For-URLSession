@@ -21,6 +21,10 @@
 		040F60C42705F5A100CE09CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60C32705F5A100CE09CE /* User.swift */; };
 		040F60C72705F97300CE09CE /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60C62705F97300CE09CE /* UsersViewModel.swift */; };
 		040F60CA2706019D00CE09CE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60C92706019D00CE09CE /* UIViewController+Extension.swift */; };
+		0433AE12270895C1008AC66E /* typicode.root.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0433AE10270895C1008AC66E /* typicode.root.cer */; };
+		0433AE13270895C1008AC66E /* typicode.intermediate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0433AE11270895C1008AC66E /* typicode.intermediate.cer */; };
+		04D817992706E84B003C4255 /* typicode.leaf.cer in Resources */ = {isa = PBXBuildFile; fileRef = 04D817982706E84B003C4255 /* typicode.leaf.cer */; };
+		04D8179D2706EB64003C4255 /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D8179C2706EB64003C4255 /* PostDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		040F60C32705F5A100CE09CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		040F60C62705F97300CE09CE /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
 		040F60C92706019D00CE09CE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		0433AE10270895C1008AC66E /* typicode.root.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = typicode.root.cer; sourceTree = "<group>"; };
+		0433AE11270895C1008AC66E /* typicode.intermediate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = typicode.intermediate.cer; sourceTree = "<group>"; };
+		04D817982706E84B003C4255 /* typicode.leaf.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = typicode.leaf.cer; sourceTree = "<group>"; };
+		04D8179C2706EB64003C4255 /* PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,9 @@
 		040F60B12705EC5500CE09CE /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				0433AE10270895C1008AC66E /* typicode.root.cer */,
+				0433AE11270895C1008AC66E /* typicode.intermediate.cer */,
+				04D817982706E84B003C4255 /* typicode.leaf.cer */,
 				040F60A52705EC0D00CE09CE /* Assets.xcassets */,
 				040F60A72705EC0D00CE09CE /* LaunchScreen.storyboard */,
 				040F60AA2705EC0D00CE09CE /* Info.plist */,
@@ -143,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				040F60C32705F5A100CE09CE /* User.swift */,
+				04D8179C2706EB64003C4255 /* PostDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,7 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				040F60A92705EC0D00CE09CE /* LaunchScreen.storyboard in Resources */,
+				04D817992706E84B003C4255 /* typicode.leaf.cer in Resources */,
 				040F60A62705EC0D00CE09CE /* Assets.xcassets in Resources */,
+				0433AE13270895C1008AC66E /* typicode.intermediate.cer in Resources */,
+				0433AE12270895C1008AC66E /* typicode.root.cer in Resources */,
 				040F60A42705EC0C00CE09CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +256,7 @@
 				040F60C12705EEEC00CE09CE /* LocalErrors.swift in Sources */,
 				040F60C42705F5A100CE09CE /* User.swift in Sources */,
 				040F60BF2705EEEC00CE09CE /* Route.swift in Sources */,
+				04D8179D2706EB64003C4255 /* PostDetail.swift in Sources */,
 				040F60BE2705EEEC00CE09CE /* HTTPMethod.swift in Sources */,
 				040F609F2705EC0C00CE09CE /* SceneDelegate.swift in Sources */,
 				040F60C72705F97300CE09CE /* UsersViewModel.swift in Sources */,
@@ -392,6 +408,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "SSL-Pinning-For-URLSession/Global/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -399,7 +416,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Sparkout-Tech-Solution.SSL-Pinning-For-URLSession";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -410,6 +427,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "SSL-Pinning-For-URLSession/Global/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -417,7 +435,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Sparkout-Tech-Solution.SSL-Pinning-For-URLSession";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

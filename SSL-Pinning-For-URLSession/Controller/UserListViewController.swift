@@ -18,6 +18,7 @@ class UserListViewController: UIViewController {
         viewModel.getUserList()
         // Response Received From Server
         viewModel.userListCompletion = userListCompletion
+        viewModel.blogPostDetailsCompletion = blogPostDetailsCompletion
     }
     
     private func userListCompletion(_ error: Error?) {
@@ -29,6 +30,19 @@ class UserListViewController: UIViewController {
         }
         DispatchQueue.main.async {[weak self] in
             self?.usersTableView.reloadData()
+        }
+    }
+    
+    func blogPostDetailsCompletion(_ error: Error?) {
+        if let error = error {
+            DispatchQueue.main.async {[weak self] in
+                self?.present(error)
+            }
+            return
+        }
+        DispatchQueue.main.async {[weak self] in
+            guard let details = self?.viewModel.details else { return }
+            self?.presentAlert(with: "Hello \(details.title)!\nPost is \(details.body)")
         }
     }
 }
@@ -46,5 +60,15 @@ extension UserListViewController: UITableViewDataSource {
         }else{
             return UITableViewCell()
         }
+    }
+}
+
+extension UserListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let user = viewModel.users?[indexPath.row] else { return }
+        let params: [String: Any] = ["title" : user.name,
+                                     "body": "Apple Developer \(indexPath.row)",
+                                     "userId": "\(indexPath.row)"]
+        viewModel.getBlogPostDeails(params: params)
     }
 }
