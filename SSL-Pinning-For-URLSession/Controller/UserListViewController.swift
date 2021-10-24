@@ -9,16 +9,16 @@ import UIKit
 
 class UserListViewController: UIViewController {
     @IBOutlet weak var usersTableView: UITableView!
-    var viewModel: UsersViewModel!
+    var getUserData: UsersViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Initialization
-        viewModel = UsersViewModel()
+        getUserData = UsersViewModel()
         // Make Request to Server
-        viewModel.getUserList()
+        getUserData()
         // Response Received From Server
-        viewModel.userListCompletion = userListCompletion
-        viewModel.blogPostDetailsCompletion = blogPostDetailsCompletion
+        getUserData.userListCompletion = userListCompletion
+        getUserData.blogPostDetailsCompletion = blogPostDetailsCompletion
     }
     
     private func userListCompletion(_ error: Error?) {
@@ -41,7 +41,7 @@ class UserListViewController: UIViewController {
             return
         }
         DispatchQueue.main.async {[weak self] in
-            guard let details = self?.viewModel.details else { return }
+            guard let details = self?.getUserData.details else { return }
             self?.presentAlert(with: "Hello \(details.title)!\nPost is \(details.body)")
         }
     }
@@ -49,11 +49,11 @@ class UserListViewController: UIViewController {
 
 extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.users?.count ?? 0
+        getUserData.users?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let users = viewModel.users {
+        if let users = getUserData.users {
             let cell = UITableViewCell()
             cell.textLabel?.text = users[indexPath.row].name
             return cell
@@ -65,10 +65,10 @@ extension UserListViewController: UITableViewDataSource {
 
 extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let user = viewModel.users?[indexPath.row] else { return }
+        guard let user = getUserData.users?[indexPath.row] else { return }
         let params: [String: Any] = ["title" : user.name,
                                      "body": "Apple Developer \(indexPath.row)",
                                      "userId": "\(indexPath.row)"]
-        viewModel.getBlogPostDeails(params: params)
+        getUserData(for: params)
     }
 }

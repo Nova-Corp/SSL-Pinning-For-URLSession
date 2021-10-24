@@ -9,13 +9,8 @@
 import Foundation
 import CommonCrypto
 
-final class NetworkService: NSObject {
-    static let shared = NetworkService()
-    // Refer: https://www.ssllabs.com/ssltest/
-    private let publicKey: String = "Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o="
-    var certificatePinning: Bool = false
-    
-    private override init() {}
+// MARK:- Public API Service
+extension NetworkService {
     // MARK:- Get User List
     func makeRequestForUserList(completion: @escaping (Result<[User], Error>) -> Void) {
         request(route: .user, type: [User].self,completion: completion)
@@ -25,6 +20,15 @@ final class NetworkService: NSObject {
     func makeRequestForUserBlogPost(parameter: [String: Any]?, completion: @escaping (Result<PostDetail, Error>) -> Void) {
         request(route: .posts, method: .POST, parameter: parameter, type: PostDetail.self,completion: completion)
     }
+}
+
+final class NetworkService: NSObject {
+    static let shared = NetworkService()
+    // Refer: https://www.ssllabs.com/ssltest/
+    private let publicKey: String = "hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc="
+    private var certificatePinning: Bool = false
+    
+    private override init() {}
     
     private func request<T: Codable>(route: Route,
                                      method: HTTPMethod = .GET,

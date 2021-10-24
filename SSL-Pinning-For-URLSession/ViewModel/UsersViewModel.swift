@@ -13,7 +13,7 @@ final class UsersViewModel {
     // Blog Post
     var details: PostDetail?
     var blogPostDetailsCompletion: ((Error?) -> Void)?
-    func getUserList() {
+    func callAsFunction() {
         NetworkService.shared.makeRequestForUserList { result in
             switch result {
             case .success(let users):
@@ -26,7 +26,7 @@ final class UsersViewModel {
         }
     }
     
-    func getBlogPostDeails(params: [String: Any]) {
+    func callAsFunction(for params: [String: Any]) {
         NetworkService.shared.makeRequestForUserBlogPost(parameter: params) { result in
             switch result {
             case .success(let details):
