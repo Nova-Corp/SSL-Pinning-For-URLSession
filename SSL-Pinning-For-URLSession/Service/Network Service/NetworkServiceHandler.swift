@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  NetworkServiceHandler.swift
 //  Network-Call-Practice
 //
 //  Created by ADMIN on 19/06/21.
@@ -9,35 +9,17 @@
 import Foundation
 import CommonCrypto
 
-// MARK:- Public API Service
-extension NetworkService {
-    // MARK:- Get User List
-    func makeRequestForUserList(completion: @escaping (Result<[User], Error>) -> Void) {
-        request(route: .user, type: [User].self,completion: completion)
-    }
-    
-    // MARK:- Get User's Blog Post Details
-    func makeRequestForUserBlogPost(parameter: [String: Any]?, completion: @escaping (Result<PostDetail, Error>) -> Void) {
-        request(route: .posts, method: .POST, parameter: parameter, type: PostDetail.self,completion: completion)
-    }
-}
-
-final class NetworkService: NSObject {
-    static let shared = NetworkService()
+class NetworkServiceHandler: NSObject {
     // Refer: https://www.ssllabs.com/ssltest/
-    private let publicKey: String = "hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc="
-    private var certificatePinning: Bool = false
-    
-    private override init() {}
-    
-    private func request<T: Codable>(route: Route,
+    private var sslPinning: SSLPinning = .publicKeyPinning(key: "adf")
+    func request<T: Codable>(route: Route,
                                      method: HTTPMethod = .GET,
                                      parameter: [String: Any]? = nil,
                                      type: T.Type,
                                      completion: @escaping (Result<T, Error>) -> Void) {
         let request = createRequest(route: route, method: method, parameter: parameter)
-        let session = URLSession(configuration: .ephemeral, delegate: self, delegateQueue: nil)
-        let task = session.dataTask(with: request) {data, _, error in
+        let session = sslPinning == .none ? URLSession.shared : URLSession(configuration: .ephemeral, delegate: self, delegateQueue: nil)
+        let task = session.dataTask(with: request) { data, response, error in
             
             if let data = data {
                 let responseString = String(data: data, encoding: .utf8) ?? "Unable to convert as string."
@@ -91,7 +73,7 @@ final class NetworkService: NSObject {
     }
 }
 
-extension NetworkService: URLSessionDelegate {
+extension NetworkServiceHandler: URLSessionDelegate {
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         
         guard let serverTrust = challenge.protectionSpace.serverTrust else {
@@ -111,11 +93,12 @@ extension NetworkService: URLSessionDelegate {
         // evaluate server certifiacte
         let isServerTrusted = SecTrustEvaluateWithError(serverTrust, nil)
         
-        if certificatePinning {
+        switch sslPinning {
+        case .certificatePinning(let name, let type):
             // Local and Remote certificate Data
             let remoteCertificateData: NSData =  SecCertificateCopyData(certificate)
             // Local Certificate
-            guard let pathToCertificate = Bundle.main.path(forResource: "typicode.leaf", ofType: "cer") else { return }
+            guard let pathToCertificate = Bundle.main.path(forResource: name, ofType: type.rawValue) else { return }
             guard let localCertificateData: NSData = NSData(contentsOfFile: pathToCertificate) else { return }
             
             // Compare certificates
@@ -126,15 +109,14 @@ extension NetworkService: URLSessionDelegate {
             } else {
                 completionHandler(.cancelAuthenticationChallenge, nil)
             }
-        } else {
+        case .publicKeyPinning(let key):
             guard let serverPublicKey = SecCertificateCopyKey(certificate) else { return }
             guard let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil ) else { return }
             let data: Data = serverPublicKeyData as Data
             // Server Hash key
             let serverHashKey = sha256(data: data)
             // Local Hash Key
-            let publickKeyLocal = publicKey
-            if isServerTrusted && (serverHashKey == publickKeyLocal) {
+            if isServerTrusted && (serverHashKey == key) {
                 // Success! This is our server
                 print("Public key pinning is successfully completed")
                 completionHandler(.useCredential, URLCredential(trust:serverTrust))
@@ -142,6 +124,7 @@ extension NetworkService: URLSessionDelegate {
             } else {
                 completionHandler(.cancelAuthenticationChallenge, nil)
             }
+        case .none: break
         }
     }
     
@@ -155,8 +138,8 @@ extension NetworkService: URLSessionDelegate {
         // 0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
         // 0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
         let headerForEncryption: [UInt8] = [
-             0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-             0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
+             0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02, 0x01,
+             0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07, 0x03, 0x42, 0x00
         ]
         
         var keyWithHeader = Data(headerForEncryption)
@@ -167,5 +150,16 @@ extension NetworkService: URLSessionDelegate {
             CC_SHA256($0.baseAddress, CC_LONG(keyWithHeader.count), &hash)
         }
         return Data(hash).base64EncodedString()
+    }
+    
+    enum SSLPinning: Equatable {
+        case certificatePinning(name: String, type: CertificateType)
+        case publicKeyPinning(key: String)
+        case none
+        
+        enum CertificateType: String {
+            case cer
+            case der
+        }
     }
 }
