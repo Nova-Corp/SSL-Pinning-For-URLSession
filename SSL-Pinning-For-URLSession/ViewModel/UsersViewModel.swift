@@ -10,11 +10,12 @@ import UIKit
 final class UsersViewModel {
     var users: [User]?
     var userListCompletion: ((Error?) -> Void)?
+    var networkManager: UserDetailsProtocol = UserDetailsNetworkService()
     // Blog Post
     var details: PostDetail?
     var blogPostDetailsCompletion: ((Error?) -> Void)?
     func callAsFunction() {
-        NetworkService.shared.makeRequestForUserList { result in
+        networkManager.makeRequestForUserList { result in
             switch result {
             case .success(let users):
                 self.users = users
@@ -27,7 +28,7 @@ final class UsersViewModel {
     }
     
     func callAsFunction(for params: [String: Any]) {
-        NetworkService.shared.makeRequestForUserBlogPost(parameter: params) { result in
+        networkManager.makeRequestForUserBlogPost(parameter: params) { result in
             switch result {
             case .success(let details):
                 self.details = details

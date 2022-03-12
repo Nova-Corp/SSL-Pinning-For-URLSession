@@ -10,7 +10,7 @@ import Foundation
 
 import Foundation
 
-enum ValidationError: LocalizedError {
+enum LocalError: LocalizedError {
     case unknownError
     case serverError
     case parsingError

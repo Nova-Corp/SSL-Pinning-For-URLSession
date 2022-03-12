@@ -23,7 +23,8 @@
 		040F60CA2706019D00CE09CE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F60C92706019D00CE09CE /* UIViewController+Extension.swift */; };
 		0433AE12270895C1008AC66E /* typicode.root.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0433AE10270895C1008AC66E /* typicode.root.cer */; };
 		0433AE13270895C1008AC66E /* typicode.intermediate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0433AE11270895C1008AC66E /* typicode.intermediate.cer */; };
-		04910813272EDDEA009ABC6B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04910812272EDDEA009ABC6B /* NetworkService.swift */; };
+		044910D027DC483600FC6B8F /* UserDetails+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044910CF27DC483600FC6B8F /* UserDetails+Protocol.swift */; };
+		044910D227DC48A200FC6B8F /* UserDetailsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044910D127DC48A200FC6B8F /* UserDetailsNetworkService.swift */; };
 		04D817992706E84B003C4255 /* typicode.leaf.cer in Resources */ = {isa = PBXBuildFile; fileRef = 04D817982706E84B003C4255 /* typicode.leaf.cer */; };
 		04D8179D2706EB64003C4255 /* PostDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D8179C2706EB64003C4255 /* PostDetail.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +48,8 @@
 		040F60C92706019D00CE09CE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		0433AE10270895C1008AC66E /* typicode.root.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = typicode.root.cer; sourceTree = "<group>"; };
 		0433AE11270895C1008AC66E /* typicode.intermediate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = typicode.intermediate.cer; sourceTree = "<group>"; };
-		04910812272EDDEA009ABC6B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		044910CF27DC483600FC6B8F /* UserDetails+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDetails+Protocol.swift"; sourceTree = "<group>"; };
+		044910D127DC48A200FC6B8F /* UserDetailsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsNetworkService.swift; sourceTree = "<group>"; };
 		04D817982706E84B003C4255 /* typicode.leaf.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = typicode.leaf.cer; sourceTree = "<group>"; };
 		04D8179C2706EB64003C4255 /* PostDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +139,7 @@
 			children = (
 				040F60B72705EEEC00CE09CE /* Network Service */,
 				04910811272EDCC7009ABC6B /* Input Validation */,
-				04910812272EDDEA009ABC6B /* NetworkService.swift */,
+				044910CF27DC483600FC6B8F /* UserDetails+Protocol.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				040F60C62705F97300CE09CE /* UsersViewModel.swift */,
+				044910D127DC48A200FC6B8F /* UserDetailsNetworkService.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -270,8 +273,9 @@
 				04D8179D2706EB64003C4255 /* PostDetail.swift in Sources */,
 				040F60BE2705EEEC00CE09CE /* HTTPMethod.swift in Sources */,
 				040F609F2705EC0C00CE09CE /* SceneDelegate.swift in Sources */,
-				04910813272EDDEA009ABC6B /* NetworkService.swift in Sources */,
 				040F60C72705F97300CE09CE /* UsersViewModel.swift in Sources */,
+				044910D027DC483600FC6B8F /* UserDetails+Protocol.swift in Sources */,
+				044910D227DC48A200FC6B8F /* UserDetailsNetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
